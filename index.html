@@ -5,6 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎓 畢業名單查詢系統</title>
 <style>
+  #redirect-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 40%, #f0e8ff 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px;
+    font-family: "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+    color: #4a3050;
+  }
+  #redirect-overlay .spin { font-size: 3rem; animation: spin 1.2s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #redirect-overlay p { font-size: 1.1rem; font-weight: 600; color: #b48abf; }
+</style>
+<script>
+  (function() {
+    var overlay = document.createElement('div');
+    overlay.id = 'redirect-overlay';
+    overlay.innerHTML = '<div class="spin">🎓</div><p>跳轉中，請稍候…</p>';
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.prepend(overlay);
+    });
+    var target = 'https://gradu-test.vercel.app/';
+    window.location.href = target;
+    setTimeout(function() {
+      var el = document.getElementById('redirect-overlay');
+      if (el) el.remove();
+    }, 15000);
+  })();
+</script>
+<style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     min-height: 100vh;
